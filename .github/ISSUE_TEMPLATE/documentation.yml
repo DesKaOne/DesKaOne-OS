@@ -1,0 +1,30 @@
+name: Documentation improvement
+description: Suggest a correction or improvement to DesKaOne OS documentation
+title: "docs: "
+labels: ["documentation"]
+body:
+  - type: markdown
+    attributes:
+      value: "Phase 0 is documentation-only. Do not submit implementation work without explicit maintainer approval."
+  - type: textarea
+    id: problem
+    attributes:
+      label: What needs improvement?
+      description: Identify the document and explain the problem.
+      placeholder: "Path, section, and why it is unclear"
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed improvement
+      description: Describe the wording, structure, or references you recommend.
+    validations:
+      required: true
+  - type: textarea
+    id: references
+    attributes:
+      label: References and context
+      description: Add links to authoritative documentation if relevant.
+    validations:
+      required: false
