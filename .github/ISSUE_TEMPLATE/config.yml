@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Security vulnerability report
+    url: https://github.com/DesKaOne/DesKaOne-OS/security
+    about: Please report security concerns privately; never post sensitive exploit details in public issues.
+  - name: Community discussions
+    url: https://github.com/DesKaOne/DesKaOne-OS/discussions
+    about: Ask questions and discuss ideas before proposing substantial changes.
