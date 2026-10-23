@@ -1,0 +1,40 @@
+name: Feature or design proposal
+description: Suggest a future capability for Server, Network, or Desktop
+title: "proposal: "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: "This is a design proposal only. A GitHub issue does not authorize implementation or change an approved architecture decision."
+  - type: dropdown
+    id: edition
+    attributes:
+      label: Edition
+      options:
+        - Shared Core
+        - Server
+        - Network
+        - Desktop
+        - Cross-edition
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem to solve
+      description: Explain the user need and current limitation.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed design
+      description: Include alternatives, trade-offs and compatibility concerns.
+    validations:
+      required: true
+  - type: textarea
+    id: impact
+    attributes:
+      label: Security, Debian compatibility, and recovery impact
+    validations:
+      required: true
