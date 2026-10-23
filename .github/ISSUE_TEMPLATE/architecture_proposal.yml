@@ -1,0 +1,33 @@
+name: Architecture decision proposal
+description: Propose a documented architecture decision or ADR
+title: "adr: "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: "Review ARCHITECTURE.md, ROADMAP.md and AGENTS.md first. Proposed decisions remain unapproved until maintainer review."
+  - type: textarea
+    id: context
+    attributes:
+      label: Context and decision required
+    validations:
+      required: true
+  - type: textarea
+    id: options
+    attributes:
+      label: Options considered
+      description: Describe at least two approaches when possible.
+    validations:
+      required: true
+  - type: textarea
+    id: recommendation
+    attributes:
+      label: Proposed decision and rationale
+    validations:
+      required: true
+  - type: textarea
+    id: consequences
+    attributes:
+      label: Consequences and migration/security risks
+    validations:
+      required: true
