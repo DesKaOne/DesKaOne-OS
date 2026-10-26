@@ -1,0 +1,5 @@
+# Bootstrap 02 candidate packages; integration is not yet validated.
+systemd-resolved
+nftables
+wireguard-tools
+openssh-client
