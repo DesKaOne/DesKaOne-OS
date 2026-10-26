@@ -1,5 +1,4 @@
-# Bootstrap 02 candidate packages; integration is not yet validated.
-systemd-resolved
+# Bootstrap 02 shared-base candidates; no resolver backend selected here.
 nftables
 wireguard-tools
 openssh-client
