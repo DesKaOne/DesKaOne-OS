@@ -3,6 +3,7 @@ set -Eeuo pipefail
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT"
 
+bash -n scripts/validate-foundation-source.sh
 bash scripts/validate-source.sh
 
 required=(
