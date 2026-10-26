@@ -26,3 +26,6 @@ All proposed edition packages and metadata live under `bootstrap/profiles/`, **o
 1. Confirm candidate package availability and correct Debian 13 naming in an approved environment.
 2. Design edition selection with single interface owner and DNS resolver owner per profile.
 3. Specify edition activation and test strategy before promoting any file into active live-build directories.
+
+## Manual source validation (not executed)
+From `bootstrap/`, run `bash scripts/validate-profiles-source.sh`. This checks Bootstrap 01/02 source guards, profile metadata, required package candidates, and that Desktop/Server-only packages and edition selection are not active in the shared live-build configuration. It does not resolve Debian packages, enable services, build an ISO, or test boot behavior.
