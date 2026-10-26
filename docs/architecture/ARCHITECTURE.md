@@ -20,9 +20,9 @@ No implementation, ISO, installable package or release is approved or available.
 | Initial CPU architecture | AMD64 |
 | Later CPU architecture | ARM64 |
 | Init and packaging | systemd, APT/dpkg, Debian-provided kernel |
-| Release policy | Debian Stable-aligned, with DesKaOne testing/stable package channels |
+| Release policy | Debian Stable-aligned, with DesKaOne Stable/Testing/Unstable package channels ([ADR-0005, Decisions D2](../decisions/ADR-0005-PACKAGE-REPOSITORY.md)) |
 
-The exact Debian codename for the first build is frozen only when the release baseline is approved.
+The accepted initial baseline is Debian 13 Trixie, AMD64 first, with the fixed codename `trixie` in repository configuration ([ADR-0001, Decisions D1 — Debian baseline](../decisions/ADR-0001-DEBIAN-BASE.md)). This is an architecture selection; implementation remains unauthorized.
 
 ## Design principles
 
@@ -52,7 +52,7 @@ Headless, OpenSSH, nftables, systemd-networkd and journald. Containers, PostgreS
 
 ## Network edition
 
-Linux routing/iproute2, nftables/NAT, WireGuard, selected DNS/DHCP backend and versioned intended configuration. A Go + HTML templates + HTMX web UI and CLI use one validated management service; privileged system changes pass through a narrowly scoped executor. The web process must not run as unrestricted root.
+Linux routing/iproute2, nftables/NAT, WireGuard, dnsmasq DNS/DHCP ([ADR-0007, Decisions D2 — dnsmasq for DNS and DHCP](../decisions/ADR-0007-NETWORK-ARCHITECTURE.md)) and versioned intended configuration. A Go + HTML templates + HTMX web UI and CLI use one validated management service; privileged system changes pass through a narrowly scoped executor. The web process must not run as unrestricted root.
 
 Management access is authenticated, CSRF-protected and bound to explicitly authorized interfaces. Separate management and data planes. Sensitive changes are audited. No open proxy or WAN administration by default.
 
@@ -70,15 +70,17 @@ Server and Network target systemd-networkd; Desktop uses NetworkManager. Never l
 
 ## Installation and images
 
-AMD64-first image targets for Server, Network and Desktop. Debian debootstrap/live-build and installer tooling are candidates, not selected implementations. UEFI is targeted first; legacy BIOS is a compatibility goal where practical. Secure Boot requires separate signing design. ARM64 follows later, with generic UEFI testing distinct from board-specific firmware/bootloader validation.
+AMD64-first image targets for Server, Network and Desktop. The accepted installer design is Debian Installer for Server/Network and a KDE Plasma Live ISO with Calamares for Desktop ([ADR-0002, Decisions D1 — Hybrid installer](../decisions/ADR-0002-INSTALLER-BOOT.md)). Initial AMD64 targets include UEFI and Legacy BIOS with Debian GRUB 2; support remains conditional on verification ([ADR-0002, Decisions D2–D3](../decisions/ADR-0002-INSTALLER-BOOT.md)). Debian-native debootstrap, live-build and installer tooling are selected for image construction; exact assembly and integration still require validation ([ADR-0004, Decisions D1 — Debian-native build tools](../decisions/ADR-0004-IMAGE-BUILD.md)). Secure Boot requires separate signing design. ARM64 follows later, with generic UEFI testing distinct from board-specific firmware/bootloader validation.
 
-ext4 is an initial filesystem candidate, not a locked partitioning design.
+The accepted root filesystem defaults are ext4 for Server/Network and Btrfs for Desktop ([ADR-0003, Decisions D1 — Edition-specific filesystem defaults](../decisions/ADR-0003-STORAGE-RECOVERY.md)). GPT is selected for both AMD64 boot modes; partition sizing and Btrfs layout details remain open ([ADR-0003, Decisions D2–D3 and §6 Open decisions](../decisions/ADR-0003-STORAGE-RECOVERY.md)).
 
 ## Packages and updates
 
-Use Debian Stable, Stable Security and Stable Updates, plus signed DesKaOne stable/testing channels. DesKaOne testing is **not** Debian Testing. Do not disable signature validation or mix unstable Debian packages casually.
+Use the accepted Debian 13 Trixie baseline and its security/updates sources ([ADR-0001, Decisions D1–D3](../decisions/ADR-0001-DEBIAN-BASE.md)), plus signed DesKaOne Stable/Testing/Unstable channels ([ADR-0005, Decisions D1–D2](../decisions/ADR-0005-PACKAGE-REPOSITORY.md)). These DesKaOne channels do **not** switch the Debian baseline to Debian Testing/Unstable. Do not disable signature validation or mix unstable Debian packages casually.
 
-Server: controlled security updates and planned reboots. Network: staged updates, backup, health checks and recovery. Desktop: user-visible updates and reboot control. Major Debian upgrades require tested migration plans. Configuration rollback is required for Network MVP; whole-system atomic rollback is not.
+Automatic security updates with edition-specific safeguards and no uncontrolled automatic reboots are accepted ([ADR-0001, Decisions D3 — Updates](../decisions/ADR-0001-DEBIAN-BASE.md); [ADR-0005, Decisions D5 — Safe security updates](../decisions/ADR-0005-PACKAGE-REPOSITORY.md)). Server: maintenance windows and availability. Network: staged updates, backup, health checks and recovery. Desktop: user-visible updates and reboot control. Major Debian upgrades require tested migration plans. Configuration rollback is required for Network MVP; whole-system atomic rollback is not.
+
+See the [Debian compatibility review](DEBIAN-COMPATIBILITY-REVIEW.md) for verified upstream facts, proposed mitigations and remaining design questions.
 
 ## Security and release
 
@@ -94,7 +96,7 @@ Custom kernel, replacement package manager, large Debian fork, universal SBC sup
 
 ## Open decisions
 
-Installer framework; partition/filesystem policy; Secure Boot trust chain; network config persistence and privileged executor implementation; dashboard authentication specifics; update/recovery orchestration; ARM64 device matrix; CI/signing infrastructure; version numbering.
+Installer automation and integration ([ADR-0002, §7 Open decisions](../decisions/ADR-0002-INSTALLER-BOOT.md)); partition sizing, Btrfs layout and recovery tooling ([ADR-0003, §6 Open decisions](../decisions/ADR-0003-STORAGE-RECOVERY.md)); Secure Boot key lifecycle ([ADR-0002, Decisions D4](../decisions/ADR-0002-INSTALLER-BOOT.md)); network config persistence, privilege boundaries and authentication ([ADR-0007, §8 Open decisions](../decisions/ADR-0007-NETWORK-ARCHITECTURE.md)); update scheduling and repository signing infrastructure ([ADR-0005, §6 Open decisions](../decisions/ADR-0005-PACKAGE-REPOSITORY.md)); ARM64 image/boot decisions and version compatibility policy before first public release ([ADR-0004, Decisions D3 and D5](../decisions/ADR-0004-IMAGE-BUILD.md)).
 
 Resolve each via design review/ADR before the relevant implementation phase.
 
