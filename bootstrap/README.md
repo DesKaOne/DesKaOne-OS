@@ -13,9 +13,11 @@ On an approved Debian build host with `live-build` installed:
 
 ```bash
 cd bootstrap
-./scripts/prepare-build.sh
-./scripts/build-iso.sh
+bash scripts/prepare-build.sh
+bash scripts/build-iso.sh
 ```
+
+The scripts are currently stored without executable file mode; invoke them with `bash` as shown above.
 
 ## Open technical items
 - The package list is provisional; validate package names, networking integration, firmware/boot behavior, and reproducibility on an approved build environment.
