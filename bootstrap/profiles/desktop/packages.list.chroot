@@ -1,0 +1,7 @@
+# INACTIVE desktop edition package candidates; not loaded by live-build.
+sddm
+plasma-desktop
+kwin-wayland
+xwayland
+network-manager
+flatpak

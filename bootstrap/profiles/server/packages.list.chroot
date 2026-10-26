@@ -1,0 +1,3 @@
+# INACTIVE server edition package candidates; not loaded by live-build.
+openssh-server
+nftables
