@@ -8,6 +8,9 @@ Initial **source-only** Debian 13 (Trixie) amd64 live-build scaffold.
 - `scripts/prepare-build.sh`: generate live-build config.
 - `scripts/build-iso.sh`: build an ISO and SHA256 checksums, **not executed**.
 
+## Source-only validation
+Run `bash scripts/validate-source.sh` from the `bootstrap` directory. This checks Bash syntax and required scaffold files only; it does **not** prove the ISO builds or boots.
+
 ## Proposed usage (not executed)
 On an approved Debian build host with `live-build` installed:
 
