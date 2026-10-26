@@ -1,0 +1,10 @@
+# Bootstrap 02 candidate: DHCP client on wired interfaces only.
+# Do not enable this file without checking interface ownership for each edition.
+[Match]
+Type=ether
+
+[Network]
+DHCP=yes
+
+[DHCPv4]
+UseDNS=yes

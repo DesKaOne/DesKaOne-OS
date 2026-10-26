@@ -1,0 +1,26 @@
+# DesKaOne OS — Bootstrap 02 System Foundation R1
+
+Source-only candidate on Debian 13 Trixie AMD64, building on Bootstrap 01.
+
+## Included
+- Conservative sysctl defaults (no IP forwarding in the shared base).
+- An **inactive example** wired-interface DHCP client networkd profile at `examples/networkd/10-deskaone-wired.network`; no router configuration.
+- Foundation metadata declaring accepted network components.
+- Candidate shared-base packages for nftables, WireGuard and SSH client. `systemd-resolved` is staged only as an inactive example under `examples/package-lists/`.
+
+## Important integration boundaries
+- The networkd example is deliberately **outside** `config/includes.chroot`, so live-build does not install this profile into `/etc/systemd/network`. Future edition integration must select and install it explicitly after interface-ownership review.
+- dnsmasq was included in Bootstrap 01's provisional package list. Its server role and resolver coexistence are not configured here.
+- Server/Network/Desktop require separate edition-specific service and network ownership policies. Desktop NetworkManager must not compete with networkd.
+- No SSH server, firewall rules, NAT, VPN peers, credentials, secrets, or public services are enabled here. The shared sysctl file explicitly disables IP forwarding if included in a built image.
+- The sysctl defaults must be overridden explicitly by a future authorized Network edition router profile.
+- `systemd-resolved` is **not** in the active live-build package list. The inactive example must not be promoted until dnsmasq/resolver integration, port binding and `/etc/resolv.conf` ownership are validated.
+
+## Validation
+This commit only provides source files. No package installation, ISO build, VM boot, networking, security, or runtime validation has been performed.
+
+## Next
+Define edition-specific activation and resolver ownership, then validate package resolution and service behavior in an approved sandbox before any runtime claims.
+
+## Source-level checks (not run)
+From the `bootstrap` directory, run `bash scripts/validate-foundation-source.sh`. This invokes the Bootstrap 01 source checks, verifies required Bootstrap 02 files and metadata, checks that forwarding is disabled, rejects an active `systemd-resolved` package selection or an installed networkd `.network` profile, and checks the foundation package list. These are source-level checks, not a substitute for runtime tests. The validation command has **not** been executed as part of these GitHub-only commits.

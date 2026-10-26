@@ -1,0 +1,4 @@
+# Bootstrap 02 shared-base candidates; no resolver backend selected here.
+nftables
+wireguard-tools
+openssh-client
