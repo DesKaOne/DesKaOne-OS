@@ -1,0 +1,17 @@
+linux-image-amd64
+systemd-sysv
+dbus
+apt
+ca-certificates
+debian-archive-keyring
+bash
+coreutils
+util-linux
+iproute2
+apparmor
+apparmor-utils
+procps
+less
+file
+sudo
+dnsmasq
