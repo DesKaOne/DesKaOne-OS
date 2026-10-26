@@ -1,0 +1,3 @@
+# INACTIVE EXAMPLE: install only after edition-specific resolver design.
+# Do not combine with dnsmasq without explicit port and resolv.conf ownership.
+systemd-resolved
