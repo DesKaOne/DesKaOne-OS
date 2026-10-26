@@ -23,4 +23,4 @@ This commit only provides source files. No package installation, ISO build, VM b
 Define edition-specific activation and resolver ownership, then validate package resolution and service behavior in an approved sandbox before any runtime claims.
 
 ## Source-level checks (not run)
-From the `bootstrap` directory, run `bash scripts/validate-source.sh` for Bootstrap 01 syntax and file assertions. Confirm `systemd-resolved` does not appear in any active `config/package-lists/*.list.chroot` file and confirm no networkd `.network` file is present in `config/includes.chroot/etc/systemd/network/`. These are source-level checks, not a substitute for runtime tests.
+From the `bootstrap` directory, run `bash scripts/validate-foundation-source.sh`. This invokes the Bootstrap 01 source checks, verifies required Bootstrap 02 files and metadata, checks that forwarding is disabled, rejects an active `systemd-resolved` package selection or an installed networkd `.network` profile, and checks the foundation package list. These are source-level checks, not a substitute for runtime tests. The validation command has **not** been executed as part of these GitHub-only commits.
